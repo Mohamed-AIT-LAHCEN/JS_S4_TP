@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <title>Manipulation de vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        p {
+            display: none;
+        }
+        .my_class {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="monapp">
+        <button @click="changerTitre">{{titre}}</button>
+        <br> 
+        <button @click="incremente">++</button>
+        <p style="display: inline-block;">{{compteur}}</p>
+        <button @click="decremente">--</button>
+        <form @submit.prevent="check">
+            <input type="text" v-model="text">
+            <button type="submit">Submit</button>
+        </form>
+        <p :class="{my_class: val}">Text contient des espaces.</p>
+    </div>
+
+    <script>
+        const appli = Vue.createApp({
+            data () {
+                return {
+                    titre: "Cliquez moi!",
+                    compteur: 0,
+                    val: false,
+                    text: ""
+                }
+            },
+            methods: {
+                changerTitre() {
+                    this.titre = "Cliqué!";
+                },
+                incremente() {
+                    this.compteur++;
+                },
+                decremente() {
+                    this.compteur--;
+                },
+                check() {
+                    if (this.text.includes(" ")) {
+                        this.val = true;
+                    } else {
+                        this.val = false;
+                    }
+                }
+            }
+        });
+        
+        appli.mount("#monapp");
+    </script>
+
+</body>
+</html>

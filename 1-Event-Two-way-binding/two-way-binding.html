@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>Manipulation de vue</title>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<style>
+    .rouge {
+        color: red;
+    }
+    .bleu {
+        color: blue;
+    }
+
+    .appear {
+        display: block;
+    }
+    .disappear {
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<div id="monapp">
+    <form @submit.prevent="check">
+        <label for="rouge">rouge</label>
+        <input type="radio" id="rouge" name="color" value="rouge" v-model="color">
+        <label for="bleu">bleu</label>
+        <input type="radio" id="bleu" name="color" value="bleu" v-model="color">
+        <br>
+        <label for="appear">afficher/cacher le paragraphe?</label>
+        <input type="checkbox" id="appear" v-model="appear">
+    </form>
+    <p :class="{rouge: color === 'rouge', bleu: color === 'bleu', appear: appear, disappear: !appear}">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure cum maxime,
+         aspernatur quas eligendi dignissimos a dolores, laboriosam provident
+          praesentium vel quam ad error, ullam perspiciatis.</p>
+</div>
+
+<script>
+    const appli = Vue.createApp({
+        data () {
+            return {
+                color: 'rouge',
+                appear: false
+            }
+        },
+        methods: {
+            check() {
+                // Logique de validation ou autre traitement
+            }
+        }
+    });
+    
+    appli.mount("#monapp");
+</script>
+
+</body>
+</html>
